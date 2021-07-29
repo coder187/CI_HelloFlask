@@ -1,8 +1,13 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request, flash
 import os
 import json
 
+if os.path.exists("env.py"):
+    import env
+
+
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 @app.route("/")
 def index():
@@ -29,15 +34,17 @@ def about_member(member_name):
             if obj["url"] == member_name:
                 member = obj
 
-    #return "<h1>" + member["name"] + "</h1><p>" + member["description"] + "</p>"
+    # return "<h1>" + member["name"] + "</h1><p>" + member["description"] + "</p>"
     return render_template("member.html", member=member)
 
-    
-@app.route("/contact", methods =["GET", "POST"])
+
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    if request.method == "POST": 
+    if request.method == "POST":
         print(request.form.get("name")) #will return "none" if key not found
         print(request.form["email"]) #will raise exception if key not found
+        flash("Thanks {}, we have recieved your message!".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
