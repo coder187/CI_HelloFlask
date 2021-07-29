@@ -12,27 +12,21 @@
         planned to leave on other business, welcomed a fourteenth to fill into their party.
     </p>
 
-    <div class="row featurette">
-        <h3>{{company[0]["name"]}}</h3>
-        <div class="col-md-7">
-            <p>
-                {{company[0]["description"]}}
-            </p>
+
+    {% for member in company %}
+        <div class="row featurette">
+            <h3>{{member.name}}</h3>
+            <div class="col-md-7">
+                <p>
+                    {{member.description}}
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{member.image_source}}" alt="" class="featurette-image image-responsive">
+            </div>
         </div>
-        <div class="col-md-5">
-            <img src="{{company[0]['image_src']}}" alt="">
-        </div>
-    </div>
-    <div class="row featurette">
-        <div class="col-md-5">
-            <img src="{{company[1]['image_src']}}" alt="">
-        </div>
-        <div class="col-md-7">
-            <h3>{{company[1]["name"]}}</h3>
-            <p>
-                {{company[1]["description"]}}
-            </p>
-        </div>
-        
-    </div>
+
+        <hr class="featurette-divider">
+    {% endfor %}
+    
 {% endblock %}
