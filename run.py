@@ -13,10 +13,25 @@ def index():
 def about():
     data = []
     with open("data/company.json","r") as json_data:
-        data=json.load(json_data)
+        data = json.load(json_data)
     return render_template("about.html", page_title="About", company=data)
 
 
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {"name":member_name,
+                "description": "The reuested member was not found",
+                "image_source":"",
+                "url":""}
+    with open("data/company.json","r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+
+    return "<h1>" + member["name"] + "</h1><p>" + member["description"] + "</p>"
+
+    
 @app.route("/contact")
 def contact():
     return render_template("contact.html", page_title="Contact")
