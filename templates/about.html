@@ -9,8 +9,9 @@
 <body>
     <nav>
         <ul>
-            <li><a href="templates/index.html">Home</a></li>
-            <li><a href="templates/about.html">About</a></li>
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('about') }}">About</a></li>
+            <li><a href="{{ url_for ('contact') }}">Contact</a></li>
         </ul>
     </nav>
     <h2>About Page</h2>
